@@ -1,0 +1,98 @@
+<style>
+html{
+	font-size: 1.5em;
+	color: #222;
+}
+
+body{
+	padding: 1rem;
+	padding-bottom: 2rem;
+}
+
+* {
+	box-sizing: border-box;
+	line-height: 1rem;
+	font-size: 0.66666rem;
+	margin:0;
+}
+
+p, ul, li, h1, h2, h3, h4, h5, h6,
+pre{
+	max-width: 30rem;	
+}
+
+.wide {
+	overflow-x: auto;
+}
+
+.wide, .wide *{
+	max-width: none;
+	text-align: center;
+}
+
+pre{
+	overflow-x: auto;
+	background-color: #eee;
+	padding-left: 1rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	margin: 0 auto;
+}
+
+ul, ol{
+	padding-left: 2rem;
+}
+
+p + p{
+	margin-top: 1rem;
+}
+
+img{
+	vertical-align:bottom;
+}
+
+h1, h2, h3, h4{
+	margin-top: 1rem;
+	line-height:2rem;
+	color: #333;
+}
+
+h1{
+	font-size:1.75rem;
+}
+
+h2{
+	font-size: 1.4rem;
+}
+
+h3 {
+	font-size: 1.1rem;
+}
+
+h4 {
+	font-size: .85rem;
+}
+
+body > * {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+code {
+	white-space: pre;
+	background-color: #e6e6e6;
+	padding: 0 .25rem;
+	display: inline-block;
+	height: .9rem;
+}
+
+pre > code {
+	background: none;
+	padding: 0;
+	display: unset;
+	height: unset;
+}
+
+
+
+</style>
