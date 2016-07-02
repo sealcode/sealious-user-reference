@@ -214,7 +214,7 @@ declarations and letting Sealious take care of interactions between each
 one of them. Below are listed and describe all the declaration syntaxes
 you need to know in order to be a productive Selious developer.
 
-Note: we'll be using the [jsig
+**Note:** we'll be using the [jsig
 notation](https://github.com/jsigbiz/spec) for describing the various
 syntaxes.
 
