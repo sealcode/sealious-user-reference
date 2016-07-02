@@ -30,6 +30,9 @@ Based on the given declarations, Sealious builds the Subject Graph, which contai
 <div class="wide">
 ```graphviz
 digraph SubjectGraph {
+	graph [fontname = "Neris"];
+	node [fontname = "Neris"];
+	edge [fontname = "Neris"];
 	rank=same;
 	Root -> Resources [label=resources];
 	Root -> Sessions [label=sessions];
@@ -161,6 +164,10 @@ The exact syntax of a call can be different for each Channel, but essentially it
 
 ```graphviz
 digraph lifespan{
+
+	graph [fontname = "Neris"];
+	node [fontname = "Neris"];
+	edge [fontname = "Neris"];
 
 	subgraph clusterClient {
 		label="Client";
