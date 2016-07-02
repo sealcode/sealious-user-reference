@@ -47,7 +47,7 @@ declarations will be explained in the following chapters.
 Based on the given declarations, Sealious builds the Subject Graph,
 which contains methods that can be called by clients.
 
-<div class="wide">
+
 
 ![](./graphviz-images/e2c017ca2750e39c9515f360ac08426e1e80c7e2.png)
 
@@ -272,7 +272,7 @@ var my_field_type = new Sealious.FieldType({
 
 #### Example
 
-<div class="wide">
+
 
 ``` {.javascript}
 var Sealious = require("sealious");
@@ -431,7 +431,7 @@ declaration.
 
 #### Syntax
 
-<div class="wide">
+
 
     type ResourceActionName: "default" | "create" | "retrieve" | "update" | "delete"
 
@@ -447,7 +447,7 @@ itself. It can be used when describing access strategies in
 
 #### Syntax
 
-<div class="wide">
+
 
 <pre>
 <code>type ResourceType: {
