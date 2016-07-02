@@ -49,7 +49,7 @@ which contains methods that can be called by clients.
 
 <div class="wide">
 
-![](.graphviz-images/e2c017ca2750e39c9515f360ac08426e1e80c7e2.png)
+![](./graphviz-images/e2c017ca2750e39c9515f360ac08426e1e80c7e2.png)
 
 </div>
 
@@ -178,7 +178,7 @@ essentially it always has to contain the information presented above.
 The differences between call syntax for Sealious Channels does not fit
 inside the scope of this reference.
 
-![](.graphviz-images/6490127010f5d116fcebc11013164ddcf33f0ea6.png)
+![](./graphviz-images/6490127010f5d116fcebc11013164ddcf33f0ea6.png)
 
 The darker nodes represent functions that are context-sensitive.
 
