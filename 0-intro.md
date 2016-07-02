@@ -150,11 +150,11 @@ Assume the following client input:
 
 ```json
 {
-	path: "/resources/person",
-	method: "create",
-	arguments: {
-		name: "Alice",
-		age: 99
+	"path": "/resources/person",
+	"method": "create",
+	"arguments": {
+		"name": "Alice",
+		"age": 99
 	}
 }
 ```
