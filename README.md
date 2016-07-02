@@ -2,8 +2,32 @@
 
 
 
+
+
+
 Sealious User Reference
-=======================
+===
+
+Table of Contents
+-----------------
+
+
+-   [Intro](#intro)
+    -   [Declarative](#declarative)
+    -   [The Subject Graph](#the-subject-graph)
+    -   [Chips](#chips)
+    -   [Context](#context)
+    -   [Lifespan of a Sealious method
+        call](#lifespan-of-a-sealious-method-call)
+-   [Declarations](#declarations)
+    -   [Generic types](#generic-types)
+    -   [FieldType](#fieldtype)
+    -   [Field](#field)
+    -   [AccessStrategyType](#accessstrategytype-1)
+    -   [AccessStrategy](#accessstrategy)
+    -   [ResourceActionName](#resourceactionname)
+    -   [ResourceType](#resourcetype)
+
 
 Intro
 -----
@@ -336,7 +360,7 @@ Use it when describing a [ResourceType](#resourcetype).
 #### Example
 
 ``` {.json}
-{name: "full-name", type: "text", required: true}
+{"name": "full-name", "type": "text", "required": true}
 ```
 
 ### AccessStrategyType

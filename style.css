@@ -16,7 +16,7 @@ body{
 }
 
 p, ul, li, h1, h2, h3, h4, h5, h6,
-pre{
+pre, #TOC, #header{
 	max-width: 30rem;	
 }
 

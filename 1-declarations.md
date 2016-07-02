@@ -125,7 +125,7 @@ Use it when describing a [ResourceType](#resourcetype).
 #### Example
 
 ```json
-{name: "full-name", type: "text", required: true}
+{"name": "full-name", "type": "text", "required": true}
 ```
 
 ### AccessStrategyType

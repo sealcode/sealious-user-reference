@@ -1,5 +1,3 @@
-# Sealious User Reference
-
 ## Intro
 
 Sealious is a declarative, resource-oriented framework for creating application backends. Although it has been built with webapps in mind, it can be (and successfully has been) used for desktop applications, as well.
