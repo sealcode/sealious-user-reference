@@ -69,6 +69,7 @@ var my_field_type = new Sealious.FieldType({
 
 #### Example
 
+<div class="wide">
 ```javascript
 var Sealious = require("sealious");
 var Promise = require("bluebird");
@@ -94,6 +95,7 @@ var field_type_color = new Sealious.ChipTypes.FieldType({
 	}
 });
 ```
+</div>
 
 ### Field
 
@@ -116,6 +118,10 @@ Fields are the most important part of a ResourceType. They describe it's behavio
 * `required`: **optional**. Defaults to `false`. If set to `true`, Sealious won't allow modifications of the resource that would result in removing a value from that field.
 * `params`: **optional**. A set of parameters that configure the behavior of the FieldType for that particular field.
 
+#### Usage
+
+Use it when describing a [ResourceType](#resourcetype).
+
 #### Example
 
 ```json
@@ -129,7 +135,7 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 #### Syntax
 
 <pre>
-<code>AccessStrategyType: {
+<code>type AccessStrategyType: {
 	name?: String,
 	checker_function: (
 		context: Context,
@@ -172,12 +178,18 @@ var new_access_str_type = new Sealious.AccessStrategyType({
 }
 ```
 
+&nbsp;
+
+```
+"only_on_tuesdays"
+```
+
 ### AccessStrategy
 
 #### Syntax
 
 <pre>
-<code>AccessStrategy: <a href="#accessstrategytype-1">AccessStrategyType</a>
+<code>type AccessStrategy: <a href="#accessstrategytype-1">AccessStrategyType</a>
 	| [type: <a href="#accessstrategytype-1">AccessStrategyType</a>, params:Any]
 </code></pre>
 
@@ -185,25 +197,75 @@ var new_access_str_type = new Sealious.AccessStrategyType({
 
 If the shorter notation is used(`AccessStrategyType`), you cannot specify any parameters to the AccessStrategyType assigned to that particular Access strategy. If you need to customize the behavior of the AccessStrategyType for that particular AccessStrategy, you have to use the longer syntax (`[type: AccessStrategyType, params:Any]`).
 
+#### Usage
+
+Currently this declaration is only being used when describing access strategies to resource actions in [ResourceType](#resourcetype) declaration.
+
 #### Examples
 
-```javascript
-"only_on_tuesdays"
-```
-&nbsp;
+* `"only_on_tuesdays"`
+* `"logged_in"`
+* `["and", ["only_on_tuesdays", "logged_in"]]`
 
-```javascript
-["and", ["only_on_tuesdays", "logged_in"]]
+### ResourceActionName
+
+#### Syntax
+
+<div class="wide">
 ```
+type ResourceActionName: "default" | "create" | "retrieve" | "update" | "delete"
+```
+</div>
+
+#### Usage
+
+It does not have it's own constructor, as it doesn't do anything by itself. It can be used when describing access strategies in [ResourceType](#resourcetype) declaration.
 
 ### ResourceType
 
 #### Syntax
 
+<div class="wide">
 <pre>
 <code>type ResourceType: {
 	name: String,
-	fields: Array&lt;<a href="field">Field</a>&gt;,
+	fields: Array&lt;<a href="#field">Field</a>&gt;,
+	access_strategy: <a href="#accessstrategy">AccessStrategy</a> | Object&lt;<a href="#resourceactionname">ResourceActionName</a>, <a href="#accessstrategy">AccessStrategy</a>&gt;
 }
 </code></pre>
+</div>
+
+#### Explanation
+
+* `name`: **required**. The name of the resource-type.
+* `fields`: **required**. An array of [Fields](#field) declarations.
+* `access_strategy`: **required**. Describes what access strategies will be used for granting access to calling various resource actions. When a single [AccessStrategy](#accessstrategy) is specified, it will be used for all of the actions. If the `Object<ResourceActionName, AccessStrategy>` notation is being used, then each action can have a different access_strategy assigned. If an action does not have an AccessStrategy assigned, it will use the `default` one.
+
+#### Usage
+
+To create a new ResourceType, call the `ResourceType` constructor:
+
+```javascript
+var Person = new Sealious.ResourceType({
+	name: "person",
+	fields: //...
+});
+```
+
+#### Examples
+
+```javascript
+{
+    name: "person",
+    fields: [
+        {name: "full-name", type: "text", required: true},
+        {name: "age", type: "int"}
+    ],
+    access_strategy: {
+        default: "owner",
+        view: "public",
+        create: "logged_in"
+    }   
+}
+```
 
