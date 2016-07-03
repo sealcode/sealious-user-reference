@@ -9,6 +9,7 @@ md: ./*.md
 	rm -rf ./graphviz-images
 	pandoc $(files)  $(common_params) \
 		--standalone \
+		-t markdown_github \
 		--template=./templates/markdown.markdown \
 		-o __temp.md
 	echo $(no_edit_message) > README.md

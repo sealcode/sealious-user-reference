@@ -30,17 +30,17 @@ type Params: Object<String, Any>;
 		params: <a href="#generic-types">Params</a>, 
 		new_value: Any,
 		old_value?: Any 
-	) => void,
+	) =&gt; void,
 	encode?: (
 		context: Context, 
 		params: <a href="#generic-types">Params</a>, 
 		value_in_code: Any
-	) => Promise<encoded_value: Any> & Any,
+	) =&gt; Promise&lt;encoded_value: Any&gt; & Any,
 	decode?: (
 		context: Context,
 		params: <a href="#generic-types">Params</a>,
 		value_in_db: Any
-	) => Promise<decoded_value: Any> & Any,
+	) =&gt; Promise&lt;decoded_value: Any&gt; & Any,
 	extends?: <a href="#fieldtype">FieldType</a>
 } | FieldTypeName
 </code></pre>
