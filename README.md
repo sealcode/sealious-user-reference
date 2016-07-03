@@ -1,4 +1,4 @@
-<!-- DON'T EDIT THIS FILE! This is a file built from the source .md files (see Makefile). The build process will override changes made to this file. Edit other .md files instead. -->
+<!-- DON'T EDIT THIS FILE!! This is a file built from the source .md files (see Makefile). The build process will override changes made to this file. Edit other .md files instead. -->
 
 
 
