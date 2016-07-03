@@ -51,7 +51,7 @@ img{
 	vertical-align:bottom;
 }
 
-h1, h2, h3, h4{
+h1, h2, h3, h4, h5{
 	margin-top: 1rem;
 	line-height:2rem;
 	color: #333;
@@ -70,7 +70,15 @@ h3 {
 }
 
 h4 {
-	font-size: .85rem;
+	font-size: .9rem;
+}
+
+h5 {
+	font-size: .75rem;
+}
+
+h5 + div.sourceCode {
+	margin-top: 0;
 }
 
 body > * {
