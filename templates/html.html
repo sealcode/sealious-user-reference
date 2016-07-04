@@ -52,11 +52,13 @@ $endif$
 </div>
 $endif$
 $if(toc)$
+<p><a href="#content-anchor">Skip to content &gt;</a></p>
 <nav id="$idprefix$TOC">
   <h2>Table of Contents</h2>
 $toc$
 </nav>
 $endif$
+<div id="content-anchor"></div>
 $body$
 $for(include-after)$
 $include-after$

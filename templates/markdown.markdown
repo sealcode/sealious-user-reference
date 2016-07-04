@@ -13,15 +13,17 @@ $endfor$
 $if(title)$
 $title$
 ===
-
-Table of Contents
------------------
-
 $endif$
 
 $if(toc)$
+
+[Skip to content >](#content-anchor)
+
+Table of Contents
+-----------------
 $toc$
 
+<h2 id="content-anchor">&nbsp;</h2>
 $endif$
 
 $body$
