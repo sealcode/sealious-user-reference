@@ -28,134 +28,135 @@ It is sensitive to the `context` and/or `item`- depending on the strategies in `
 
 Resolves when the user_id in the provided context is set (not `null`), rejects otherwise.
 
-##### Sensitivity
+*  Sensitivity
 
-It is only sensitive to the `context` argument.
+    It is only sensitive to the `context` argument.
 
-##### Params synopsis
+*  Params synopsis
 
-This Access Strategy Type does not take any parameters.
+    This Access Strategy Type does not take any parameters.
 
-##### Example instance declaration
+*  Example instance declaration
 
-```javascript
-"logged_in"
-```
+    ```javascript
+    "logged_in"
+    ```
 
 #### noone
 
 Always rejects.
 
-##### Sensitivity
+*  Sensitivity
 
-sensitive to nothing. Always rejects.
+    sensitive to nothing. Always rejects.
 
-##### Params synopsis
+*  Params synopsis
 
-This Access Strategy Type does not take any parameters.
+    This Access Strategy Type does not take any parameters.
 
-##### Example instance declaration
+*  Example instance declaration
 
-```javascript
-"noone"
-```
+    ```javascript
+    "noone"
+    ```
 
 #### not
 
 Takes an Access Strategy as an argument. Resolves if the strategy in the `params` rejects. Rejects if the strategy in the params resolves.
 
-##### Sensitivity
+*  Sensitivity
 
-It is sensitive to the `context` and/or `item`- depending on the strategy in `params`.
+    It is sensitive to the `context` and/or `item`- depending on the strategy in `params`.
 
-##### Params synopsis
+*  Params synopsis
 
-<pre>
-<code>type not_params: <a href="#accessstrategy">AccessStrategy</a></code>
-</pre>
+    <pre>
+    <code>type not_params: <a href="#accessstrategy">AccessStrategy</a></code>
+    </pre>
 
-##### Example instance declaration
+*  Example instance declaration
 
-```javascript
-["not", "logged_in"]
-```
+    ```javascript
+    ["not", "logged_in"]
+    ```
 
-```javascript
-["not", ["and", ["logged_in", "owner"]]]
-```
+    ```javascript
+    ["not", ["and", ["logged_in", "owner"]]]
+    ```
 
 #### or
 
 Similarly to the [and](#and) access strategy type, this strategy type takes a list of [AccessStrategies](#accessstrategy) as the only parameter. It resolves iff one of the strategies on the list resolves.
 
-##### Sensitivity
+*  Sensitivity
 
-It is sensitive to the `context` and/or `item`- depending on the strategies in `params`.
+    It is sensitive to the `context` and/or `item`- depending on the strategies in `params`.
 
-##### Params synopsis 
+*  Params synopsis 
 
-<pre>
-<code>type or_params: Array&lt;<a href="#accessstrategy">AccessStrategy</a>&gt;</code>
-</pre>
+    <pre>
+    <code>type or_params: Array&lt;<a href="#accessstrategy">AccessStrategy</a>&gt;</code>
+    </pre>
 
-##### Example instance declaration
+*  Example instance declaration
 
-```javascript
-["or", ["owner", "admin"]]
-```
+    ```javascript
+    ["or", ["owner", "admin"]]
+    ```
 
 #### owner
 
 Resolves only if the `user_id` in the provided context matches the `user_id` in the `created_context` attribute of the given `item`.
 
-##### Sensitivity
+*  Sensitivity
 
-It is sensitive to the `context` *and* to the `item` arguments.
+    It is sensitive to the `context` *and* to the `item` arguments.
 
-##### Params synopsis 
+*  Params synopsis 
 
-This Access Strategy Type does not take any parameters.	
+    This Access Strategy Type does not take any parameters.	
 
-##### Example instance declaration
+*  Example instance declaration
 
-```javascript
-"owner"
-```
+    ```javascript
+    "owner"
+    ```
 
 #### public
 
 Always resolves.
 
-##### Sensitivity
+*  Sensitivity
 
-Sensitive to nothing. Resolves for any given arguments.
+    Sensitive to nothing. Resolves for any given arguments.
 
-##### Params synopsis 
+*  Params synopsis 
 
-This Access Strategy Type does not take any parameters.	
+    This Access Strategy Type does not take any parameters.	
 
-##### Example instance declaration
+*  Example instance declaration
 
-```javascript
-"public"
-```
+    ```javascript
+    "public"
+    ```
+    
 #### super
 
 Resolves only if the provided Context is an instance of SuperContext.
 
-##### Sensitivity
+*  Sensitivity
 
-It is sensitive to the `context` argument only.
+    It is sensitive to the `context` argument only.
 
-##### Params synopsis 
+*  Params synopsis 
 
-This Access Strategy Type does not take any parameters.	
+    This Access Strategy Type does not take any parameters.	
 
-##### Example instance declaration
+*  Example instance declaration
 
-```javascript
-"super"
-```
+    ```javascript
+    "super"
+    ```
 
 #### themselves
 
@@ -163,16 +164,16 @@ Resolves only if the `user_id` in the `context` argument matches the `id` attrib
 
 Useful for creating access strategies for the `User` ResourceType. 
 
-##### Sensitivity
+*  Sensitivity
 
-It is sensitive to the `context` *and* to the `item` arguments.
+    It is sensitive to the `context` *and* to the `item` arguments.
 
-##### Params synopsis 
+*  Params synopsis 
 
-This Access Strategy Type does not take any parameters.	
+    This Access Strategy Type does not take any parameters.	
 
-##### Example instance declaration
+*  Example instance declaration
 
-```javascript
-"themselves"
-```
+    ```javascript
+    "themselves"
+    ```
