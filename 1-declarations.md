@@ -43,7 +43,8 @@ type Params: Object<String, Any>;
 	) =&gt; Promise&lt;decoded_value: Any&gt; & Any,
 	extends?: <a href="#fieldtype">FieldType</a>
 } | FieldTypeName
-</code></pre>
+</code>
+</pre>
 
 #### Explanation
 
@@ -109,7 +110,8 @@ Fields are the most important part of a ResourceType. They describe it's behavio
 	name: String,
 	required?: Boolean,
 	params?: <a href="#generic-types">Params</a>
-}</code></pre>
+}</code>
+</pre>
 
 #### Explanation
 
@@ -143,7 +145,8 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 		item?: Any
 	) => Promise<error_message?: String>
 } | AccessStrategyName
-</code></pre>
+</code>
+</pre>
 
 #### Explanation
 
@@ -191,7 +194,8 @@ var new_access_str_type = new Sealious.AccessStrategyType({
 <pre>
 <code>type AccessStrategy: <a href="#accessstrategytype-1">AccessStrategyType</a>
 	| [type: <a href="#accessstrategytype-1">AccessStrategyType</a>, params:Any]
-</code></pre>
+</code>
+</pre>
 
 #### Explanation
 
@@ -232,7 +236,8 @@ It does not have it's own constructor, as it doesn't do anything by itself. It c
 	fields: Array&lt;<a href="#field">Field</a>&gt;,
 	access_strategy: <a href="#accessstrategy">AccessStrategy</a> | Object&lt;<a href="#resourceactionname">ResourceActionName</a>, <a href="#accessstrategy">AccessStrategy</a>&gt;
 }
-</code></pre>
+</code>
+</pre>
 </div>
 
 #### Explanation
