@@ -358,24 +358,28 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 
 -   Examples
 
-    ``` javascript
-    {
-        name: "only_on_tuesdays",
-        checker_function: function(context, params, item){
-            var d = new Date(context.timestamp);
-            var wd = d.getDay();
-            if(wd == 2){
-                return Promise.resolve();
-            }else{
-                return Promise.reject("Come back on a Tuesday!");
+    -   declaring a new Access Strategy Type
+
+        ``` javascript
+        {
+            name: "only_on_tuesdays",
+            checker_function: function(context, params, item){
+                var d = new Date(context.timestamp);
+                var wd = d.getDay();
+                if(wd == 2){
+                    return Promise.resolve();
+                }else{
+                    return Promise.reject("Come back on a Tuesday!");
+                }
             }
         }
-    }
-    ```
+        ```
 
-     
+    -   pointing at an already existing Strategy Type
 
+        ``` javascript
         "only_on_tuesdays"
+        ```
 
 ### AccessStrategy
 
