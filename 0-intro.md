@@ -225,8 +225,8 @@ digraph lifespan{
 	validate_values  -> is_valid;
 	is_valid -> encode_values [label="yes"];
 	encode_values -> create_resource;
-	is_valid -> receive_result [label="no", constraint=false, weight=100, color="red"];
-	create_resource -> receive_result [constraint=false, weight=100, color="green", label="created_resource"];
+	is_valid -> receive_result [label="no", constraint=false, weight=100, color="#FF851B"];
+	create_resource -> receive_result [constraint=false, weight=100, color="#2ECC40", label="created_resource"];
 
 	
 }

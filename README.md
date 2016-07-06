@@ -195,7 +195,7 @@ Assume the following client input:
 
 The exact syntax of a call can be different for each Channel, but essentially it always has to contain the information presented above. The differences between call syntax for Sealious Channels does not fit inside the scope of this reference.
 
-![](./graphviz-images/4a8dc54834cdc2b4d9b42378e86fbac2e17f0704.png)
+![](./graphviz-images/a76edef096c37fe1b003279ff3b8a0664d7512e5.png)
 
 The darker nodes represent functions that are context-sensitive.
 
@@ -393,7 +393,7 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 
 -   Explanation
 
-    If the shorter notation is used(`AccessStrategyType`), you cannot specify any parameters to the AccessStrategyType assigned to that particular Access strategy. If you need to customize the behavior of the AccessStrategyType for that particular AccessStrategy, you have to use the longer syntax (`[type: AccessStrategyType, params:Any]`).
+    If the shorter notation is used (`AccessStrategyType`), you cannot specify any parameters to the AccessStrategyType assigned to that particular Access strategy. If you need to customize the behavior of the AccessStrategyType for that particular AccessStrategy, you have to use the longer syntax (`[type: AccessStrategyType, params:Any]`).
 
 -   Usage
 
