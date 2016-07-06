@@ -76,7 +76,7 @@ type Params: Object<String, Any>;
 	var Promise = require("bluebird");
 	var Color = require("color");
 
-	var field_type_color = new Sealious.ChipTypes.FieldType({
+	var field_type_color = new Sealious.FieldType({
 		name: "color",
 		is_proper_value: function(accept, reject, context, params, new_value){
 			try {

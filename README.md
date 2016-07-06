@@ -53,7 +53,7 @@ Table of Contents
         -   [email](#email)
         -   [file](#file)
         -   [float](#float)
-        -   [**hashed-text**](#hashed-text)
+        -   [hashed-text](#hashed-text)
         -   [int](#int)
         -   [single\_reference](#single_reference)
         -   [text](#text)
@@ -271,7 +271,7 @@ Creating a Sealious application consists mainly of composing various declaration
     var Promise = require("bluebird");
     var Color = require("color");
 
-    var field_type_color = new Sealious.ChipTypes.FieldType({
+    var field_type_color = new Sealious.FieldType({
         name: "color",
         is_proper_value: function(accept, reject, context, params, new_value){
             try {
@@ -815,7 +815,7 @@ Stores any real number.
 
     The values are stored in the datastore as verbatim real numbers (floats).
 
-#### **hashed-text**
+#### hashed-text
 
 Extends the [text](#text) field-type. Takes any text, and if it meets the criteria specified in the field's params, hashes it with the [RFC 2898](https://tools.ietf.org/html/rfc2898)-recommended PBKDF2 algorithm.
 
