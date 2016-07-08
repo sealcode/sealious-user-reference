@@ -143,7 +143,8 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 			context: Context,
 			params: <a href="#generic-types">Params</a>,
 			item?: Any
-		) => Promise<error_message?: String> | Boolean
+		) => Promise<error_message?: String> | Boolean,
+		item_sensitive?: Boolean | (params: Any) => (Boolean | Promise)
 	} | AccessStrategyName
 	</code>
 	</pre>
@@ -151,7 +152,8 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 * Explanation
 
 	* `name`: **optional**. If specified, the AccessStrategyType will be registered and will be accessible by it's name. Useful when the type is used many times.
-	* `checker_function`: **required**. Takes a `context`, `params`, and decides whether or not to allow access. If access is denied, the function should return `Promise.reject("reason")`. The function can also return `true` and `false` to accept and deny access, respectively.
+	* `checker_function`: **required**. Takes a `context`, `params`, and decides whether or not to allow access. If access is denied, the function should return `Promise.reject("reason")`. The function can also return `true` and `false` to accept and deny access, respectively. If the access strategy is defined as `item_sensitive`, it will receive a third parameter - an object representing the item to which access is being decided.
+	* `item_sensitive`: **optional**. Default to `false`. If set to `true` (or a resolving function, or a function that returns `true`), the `checker_function` will be provided with the item to which access is decided by the access strategy of this type. Loading the item data might by costly - that's why by default the `checker_function` will not receive it as argument.
 
 * Usage
 
