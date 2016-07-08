@@ -336,7 +336,7 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
             context: Context,
             params: <a href="#generic-types">Params</a>,
             item?: Any
-        ) => Promise<error_message?: String>
+        ) => Promise<error_message?: String> | Boolean
     } | AccessStrategyName
     </code>
     </pre>
@@ -344,7 +344,7 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 -   Explanation
 
     -   `name`: **optional**. If specified, the AccessStrategyType will be registered and will be accessible by it's name. Useful when the type is used many times.
-    -   `checker_function`: **required**. Takes a `context`, `params`, and decides whether or not to allow access. If access is denied, the function should return `Promise.reject("reason")`.
+    -   `checker_function`: **required**. Takes a `context`, `params`, and decides whether or not to allow access. If access is denied, the function should return `Promise.reject("reason")`. The function can also return `true` and `false` to accept and deny access, respectively.
 -   Usage
 
     To create a new AccessStrategyType, call the AccessStrategyType constructor:
