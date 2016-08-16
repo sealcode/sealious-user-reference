@@ -98,7 +98,7 @@ type Params: Object<String, Any>;
 
 ### Field
 
-Fields are the most important part of a ResourceType. They describe it's behavior and structure.
+Fields are the most important part of a Collection. They describe it's behavior and structure.
 
 * Syntax
 
@@ -114,13 +114,13 @@ Fields are the most important part of a ResourceType. They describe it's behavio
 * Explanation
 
 	* `type`: required. A FieldType declaration. It's more comfortable to use the "short" FieldType notation here (that is: just entering the name of the registered FieldType).
-	* `name`: the name of the field. Has to be unique within the ResourceType.
+	* `name`: the name of the field. Has to be unique within the Collection.
 	* `required`: **optional**. Defaults to `false`. If set to `true`, Sealious won't allow modifications of the resource that would result in removing a value from that field.
 	* `params`: **optional**. A set of parameters that configure the behavior of the FieldType for that particular field.
 
 * Usage
 
-	Use it when describing a [ResourceType](#resourcetype).
+	Use it when describing a [Collection](#collection).
 
 * Example
 
@@ -130,7 +130,7 @@ Fields are the most important part of a ResourceType. They describe it's behavio
 
 ### AccessStrategyType
 
-AccessStrategyType describes a type of an access strategy that can be parametrized, instantiated, and, for example, assigned to a ResourceType.
+AccessStrategyType describes a type of an access strategy that can be parametrized, instantiated, and, for example, assigned to a Collection.
 
 * Syntax
 
@@ -205,7 +205,7 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 
 * Usage
 
-	Currently this declaration is only being used when describing access strategies to resource actions in [ResourceType](#resourcetype) declaration.
+	Currently this declaration is only being used when describing access strategies to resource actions in [Collection](#collection) declaration.
 
 * Examples
 
@@ -225,15 +225,15 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 
 * Usage
 
-	It does not have it's own constructor, as it doesn't do anything by itself. It can be used when describing access strategies in [ResourceType](#resourcetype) declaration.
+	It does not have it's own constructor, as it doesn't do anything by itself. It can be used when describing access strategies in [Collection](#collection) declaration.
 
-### ResourceType
+### Collection
 
 * Syntax
 
 	<div class="wide">
 	<pre>
-	<code>type ResourceType: {
+	<code>type Collection: {
 		name: String,
 		fields: Array&lt;<a href="#field">Field</a>&gt;,
 		access_strategy: <a href="#accessstrategy">AccessStrategy</a> | Object&lt;<a href="#resourceactionname">ResourceActionName</a>, <a href="#accessstrategy">AccessStrategy</a>&gt;
@@ -250,10 +250,10 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 
 * Usage
 
-	To create a new ResourceType, call the `ResourceType` constructor:
+	To create a new Collection, call the `Collection` constructor:
 
 	```javascript
-	var Person = new Sealious.ResourceType({
+	var Person = new Sealious.Collection({
 		name: "person",
 		fields: //...
 	});

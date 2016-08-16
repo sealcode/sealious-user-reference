@@ -162,7 +162,7 @@ Resolves only if the provided Context is an instance of SuperContext.
 
 Resolves only if the `user_id` in the `context` argument matches the `id` attribute of the `item` argument. 
 
-Useful for creating access strategies for the `User` ResourceType. 
+Useful for creating access strategies for the `User` Collection. 
 
 *  Sensitivity
 
@@ -423,11 +423,11 @@ Can reference any other resource.
 
 	```javascript
 	type single_reference_params: {
-		resource_type: ResourceTypeName
+		collection: CollectionDeclaration
 	}
 	```
 	
-	* `resource_type`: **required**. Only references to resources of that particular type will be accepted.
+	* `collection`: **required**. Only references to resources of that particular type will be accepted.
 	
 * **sensitivity**
 
