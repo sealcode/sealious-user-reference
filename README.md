@@ -93,7 +93,7 @@ That's all Sealious needs to create an API that lets users perform [CRUD](https:
 
 Based on the given declarations, Sealious builds the Subject Graph, which contains methods that can be called by clients.
 
-![](./graphviz-images/097150fac9498647798edbc4f46f7f27555bf134.png)
+![](graphviz-images/d34893b457cfd68480e2998dc68e8f7c.png)
 
 Note that it does look like a tree in the above example, but certain custom Subjects can redirect to another nodes, possibly creating a cycle.
 
@@ -195,7 +195,7 @@ Assume the following client input:
 
 The exact syntax of a call can be different for each Channel, but essentially it always has to contain the information presented above. The differences between call syntax for Sealious Channels does not fit inside the scope of this reference.
 
-![](./graphviz-images/a76edef096c37fe1b003279ff3b8a0664d7512e5.png)
+![](graphviz-images/4ed5f199fd1cfab80ae0df0518fb2296.png)
 
 The darker nodes represent functions that are context-sensitive.
 
@@ -222,13 +222,11 @@ Creating a Sealious application consists mainly of composing various declaration
     <code>type FieldType: {
         name?: String,
         is_proper_value: (
-            accept: <a href="#generic-types">AcceptCallback</a>, 
-            reject: <a href="#generic-types">RejectCallback</a>, 
             context: Context, 
             params: <a href="#generic-types">Params</a>, 
             new_value: Any,
             old_value?: Any 
-        ) =&gt; void,
+        ) =&gt; Promise<reject_reason?: String>,
         encode?: (
             context: Context, 
             params: <a href="#generic-types">Params</a>, 
@@ -249,7 +247,7 @@ Creating a Sealious application consists mainly of composing various declaration
     You can notice that there are two possible syntaxes (separated above with a `|` character). When creating a new FieldType, one has to describe it's behavior with the former notation. When only referencing an already described FieldType, one can use it's unique name.
 
     -   `name`: **optional**. The name of the FieldType. Please note that this is the name of the *type* of a field, not a name of a *field*. Has to be unique amongst all other registred FieldTypes. When provided, the FieldType created by this declaration can be referenced with `FieldTypeName`.
-    -   `is_proper_value`: a function that takes a value (`new_value`) and decides whether that value is accepted. Can take `old_value` into consideration. `params` are parameters for the particular *field* that uses this field *type*.
+    -   `is_proper_value`: a function that takes a value (`new_value`) and decides whether that value is accepted. Can take `old_value` into consideration. `params` are parameters for the particular *field* that uses this field *type*. Should `return Promise.resolve()` to accept, and `return Promise.reject("Reason")` to reject.
     -   `encode`: **optional**. Takes the value for a field from client's input and transforms it into something else. The result of calling that function for the client's input is what will be stored in the database.
     -   `decode`: **optional**. A function reverse to `encode`. If declared, the value in the database will be run through that function before being returned to the client.
     -   `extends`: **optional**. Must be a proper `FieldType` declaration. When specified, the field-type being declared will inherit behavior from the type it is extending. All specified methods will obscure the parent's methods. The unspecified will be inherited.
@@ -273,7 +271,7 @@ Creating a Sealious application consists mainly of composing various declaration
 
     var field_type_color = new Sealious.FieldType({
         name: "color",
-        is_proper_value: function(accept, reject, context, params, new_value){
+        is_proper_value: function(context, params, new_value){
             try {
                 if (typeof (new_value) === "string"){
                     Color(new_value.toLowerCase());
@@ -281,9 +279,9 @@ Creating a Sealious application consists mainly of composing various declaration
                     Color(new_value);
                 }
             } catch (e){
-                reject("Value `" + new_value + "` could not be parsed as a color.");
+                return Promise.reject("Value `" + new_value + "` could not be parsed as a color.");
             }
-            accept();
+            return Promise.resolve();
         },
         encode: function(context, params, value_in_code){
             var color = Color(value_in_code);
