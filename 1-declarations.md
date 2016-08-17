@@ -24,13 +24,11 @@ type Params: Object<String, Any>;
 	<code>type FieldType: {
 		name?: String,
 		is_proper_value: (
-			accept: <a href="#generic-types">AcceptCallback</a>, 
-			reject: <a href="#generic-types">RejectCallback</a>, 
 			context: Context, 
 			params: <a href="#generic-types">Params</a>, 
 			new_value: Any,
 			old_value?: Any 
-		) =&gt; void,
+		) =&gt; Promise<reject_reason?: String>,
 		encode?: (
 			context: Context, 
 			params: <a href="#generic-types">Params</a>, 
@@ -41,7 +39,8 @@ type Params: Object<String, Any>;
 			params: <a href="#generic-types">Params</a>,
 			value_in_db: Any
 		) =&gt; Promise&lt;decoded_value: Any&gt; & Any,
-		extends?: <a href="#fieldtype">FieldType</a>
+		extends?: <a href="#fieldtype">FieldType</a>,
+		has_index?: (params: Any) => false | index_type: String | Promise&lt;false | index_type: String&gt;
 	} | FieldTypeName
 	</code>
 	</pre>
@@ -51,10 +50,11 @@ type Params: Object<String, Any>;
 	You can notice that there are two possible syntaxes (separated above with a `|` character). When creating a new FieldType, one has to describe it's behavior with the former notation. When only referencing an already described FieldType, one can use it's unique name.
 
 	* `name`: **optional**. The name of the FieldType. Please note that this is the name of the *type* of a field, not a name of a *field*. Has to be unique amongst all other registred FieldTypes. When provided, the FieldType created by this declaration can be referenced with `FieldTypeName`.
-	* `is_proper_value`: a function that takes a value (`new_value`) and decides whether that value is accepted. Can take `old_value` into consideration. `params` are parameters for the particular *field* that uses this field *type*.
+	* `is_proper_value`: a function that takes a value (`new_value`) and decides whether that value is accepted. Can take `old_value` into consideration. `params` are parameters for the particular *field* that uses this field *type*. Should `return Promise.resolve()` to accept, and `return Promise.reject("Reason")` to reject.
 	* `encode`: **optional**. Takes the value for a field from client's input and transforms it into something else. The result of calling that function for the client's input is what will be stored in the database.
 	* `decode`: **optional**. A function reverse to `encode`. If declared, the value in the database will be run through that function before being returned to the client.
 	* `extends`: **optional**. Must be a proper `FieldType` declaration. When specified, the field-type being declared will inherit behavior from the type it is extending. All specified methods will obscure the parent's methods. The unspecified will be inherited.
+	* `has_index`: **optional**. Whether or not to instruct the Datastore to create an index on that field. In order to include the contents of the fields of this type in full-text-search, return "text" here.
 
 * Usage
 
@@ -78,7 +78,7 @@ type Params: Object<String, Any>;
 
 	var field_type_color = new Sealious.FieldType({
 		name: "color",
-		is_proper_value: function(accept, reject, context, params, new_value){
+		is_proper_value: function(context, params, new_value){
 			try {
 				if (typeof (new_value) === "string"){
 					Color(new_value.toLowerCase());
@@ -86,9 +86,9 @@ type Params: Object<String, Any>;
 					Color(new_value);
 				}
 			} catch (e){
-				reject("Value `" + new_value + "` could not be parsed as a color.");
+				return Promise.reject("Value `" + new_value + "` could not be parsed as a color.");
 			}
-			accept();
+			return Promise.resolve();
 		},
 		encode: function(context, params, value_in_code){
 			var color = Color(value_in_code);
@@ -100,7 +100,7 @@ type Params: Object<String, Any>;
 
 ### Field
 
-Fields are the most important part of a ResourceType. They describe it's behavior and structure.
+Fields are the most important part of a Collection. They describe it's behavior and structure.
 
 * Syntax
 
@@ -116,13 +116,13 @@ Fields are the most important part of a ResourceType. They describe it's behavio
 * Explanation
 
 	* `type`: required. A FieldType declaration. It's more comfortable to use the "short" FieldType notation here (that is: just entering the name of the registered FieldType).
-	* `name`: the name of the field. Has to be unique within the ResourceType.
+	* `name`: the name of the field. Has to be unique within the Collection.
 	* `required`: **optional**. Defaults to `false`. If set to `true`, Sealious won't allow modifications of the resource that would result in removing a value from that field.
 	* `params`: **optional**. A set of parameters that configure the behavior of the FieldType for that particular field.
 
 * Usage
 
-	Use it when describing a [ResourceType](#resourcetype).
+	Use it when describing a [Collection](#collection).
 
 * Example
 
@@ -132,7 +132,7 @@ Fields are the most important part of a ResourceType. They describe it's behavio
 
 ### AccessStrategyType
 
-AccessStrategyType describes a type of an access strategy that can be parametrized, instantiated, and, for example, assigned to a ResourceType.
+AccessStrategyType describes a type of an access strategy that can be parametrized, instantiated, and, for example, assigned to a Collection.
 
 * Syntax
 
@@ -207,7 +207,7 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 
 * Usage
 
-	Currently this declaration is only being used when describing access strategies to resource actions in [ResourceType](#resourcetype) declaration.
+	Currently this declaration is only being used when describing access strategies to resource actions in [Collection](#collection) declaration.
 
 * Examples
 
@@ -227,15 +227,15 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 
 * Usage
 
-	It does not have it's own constructor, as it doesn't do anything by itself. It can be used when describing access strategies in [ResourceType](#resourcetype) declaration.
+	It does not have it's own constructor, as it doesn't do anything by itself. It can be used when describing access strategies in [Collection](#collection) declaration.
 
-### ResourceType
+### Collection
 
 * Syntax
 
 	<div class="wide">
 	<pre>
-	<code>type ResourceType: {
+	<code>type Collection: {
 		name: String,
 		fields: Array&lt;<a href="#field">Field</a>&gt;,
 		access_strategy: <a href="#accessstrategy">AccessStrategy</a> | Object&lt;<a href="#resourceactionname">ResourceActionName</a>, <a href="#accessstrategy">AccessStrategy</a>&gt;
@@ -252,10 +252,10 @@ AccessStrategyType describes a type of an access strategy that can be parametriz
 
 * Usage
 
-	To create a new ResourceType, call the `ResourceType` constructor:
+	To create a new Collection, call the `Collection` constructor:
 
 	```javascript
-	var Person = new Sealious.ResourceType({
+	var Person = new Sealious.Collection({
 		name: "person",
 		fields: //...
 	});

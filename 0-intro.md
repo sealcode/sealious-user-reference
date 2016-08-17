@@ -7,7 +7,7 @@ Sealious is a declarative, resource-oriented framework for creating application 
 When creating a Sealious application, the developer has to focus on the "what" of the application, not the "how". Consider the following Sealious resource-type declaration:
 
 ```javascript
-var Person = new Sealious.ResourceType({
+var Person = new Sealious.Collection({
 	name: "people",
 	fields: [
 		{name: "full-name", type: "text", required: true},
@@ -73,7 +73,7 @@ Sealious uses `npm` as a way to distribute it's modules. To distinguish them fro
 Sealious plugins contain one or more "chips". Chips are small entities that contain a singular purpose. Every chip is one of these types:
 
 * Channel
-* ResourceType
+* Collection
 * FieldType
 * AccessStrategyType
 * Datastore
@@ -200,7 +200,7 @@ digraph lifespan{
 
 		subgraph clusterResourceTypeCreate {
 			style="dashed";
-			label="ResourceTypePerson:create";
+			label="PersonCollection:create";
 			validate_values [label="Validate all values\n(iterate through FieldTypes)", style=filled];
 			check_access [label="check access\n(via AccessStrategy)", style=filled];
 			check_missing [label="check if any required\nfields are missing"];

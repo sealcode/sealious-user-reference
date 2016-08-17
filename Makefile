@@ -7,6 +7,7 @@ no_edit_message = "<!-- DON'T EDIT THIS FILE!! This is a file built from the sou
 
 md: ./*.md 
 	rm -rf ./graphviz-images
+	mkdir -p ./graphviz-images
 	pandoc $(files)  $(common_params) \
 		--standalone \
 		-t markdown_github \
@@ -22,6 +23,7 @@ md: ./*.md
 
 html: ./*.md style.css
 	rm -rf ./graphviz-images
+	mkdir -p ./graphviz-images
 	pandoc $(files) $(common_params) \
 		-H style.inc \
 		--highlight-style=kate \
