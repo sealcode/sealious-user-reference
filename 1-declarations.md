@@ -39,7 +39,8 @@ type Params: Object<String, Any>;
 			params: <a href="#generic-types">Params</a>,
 			value_in_db: Any
 		) =&gt; Promise&lt;decoded_value: Any&gt; & Any,
-		extends?: <a href="#fieldtype">FieldType</a>
+		extends?: <a href="#fieldtype">FieldType</a>,
+		has_index?: (params: Any) => false | index_type: String | Promise&lt;false | index_type: String&gt;
 	} | FieldTypeName
 	</code>
 	</pre>
@@ -53,6 +54,7 @@ type Params: Object<String, Any>;
 	* `encode`: **optional**. Takes the value for a field from client's input and transforms it into something else. The result of calling that function for the client's input is what will be stored in the database.
 	* `decode`: **optional**. A function reverse to `encode`. If declared, the value in the database will be run through that function before being returned to the client.
 	* `extends`: **optional**. Must be a proper `FieldType` declaration. When specified, the field-type being declared will inherit behavior from the type it is extending. All specified methods will obscure the parent's methods. The unspecified will be inherited.
+	* `has_index`: **optional**. Whether or not to instruct the Datastore to create an index on that field. In order to include the contents of the fields of this type in full-text-search, return "text" here.
 
 * Usage
 
