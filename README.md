@@ -238,7 +238,12 @@ Creating a Sealious application consists mainly of composing various declaration
             value_in_db: Any
         ) =&gt; Promise&lt;decoded_value: Any&gt; & Any,
         extends?: <a href="#fieldtype">FieldType</a>,
-        has_index?: (params: Any) => false | index_type: String | Promise&lt;false | index_type: String&gt;
+        has_index?: (params: Any) =&gt; false | index_type: String | Promise&lt;false | index_type: String&gt;
+        format?: (
+            context: Context,
+            decoded_value: Any,
+            format: String
+        ) =&gt; formatted_value: Any | Promise&lt;formatted_value: Any&gt;
     } | FieldTypeName
     </code>
     </pre>
@@ -253,6 +258,7 @@ Creating a Sealious application consists mainly of composing various declaration
     -   `decode`: **optional**. A function reverse to `encode`. If declared, the value in the database will be run through that function before being returned to the client.
     -   `extends`: **optional**. Must be a proper `FieldType` declaration. When specified, the field-type being declared will inherit behavior from the type it is extending. All specified methods will obscure the parent's methods. The unspecified will be inherited.
     -   `has_index`: **optional**. Whether or not to instruct the Datastore to create an index on that field. In order to include the contents of the fields of this type in full-text-search, return "text" here.
+    -   `format`: **optional**. The user viewing a resource or a list of resources might specify a string for each of the fields in a collection that tells Sealious how the user wants the values to be displayed. That string is then passed to the `format` method of a given field type, if it exists. The method will be given the current context and the decoded value of the field. The method is supposed to format the `decoded_value` according to the specified `format`.
 -   Usage
 
     To create a new FieldType instance, call the `Sealious.FieldType` constructor.
