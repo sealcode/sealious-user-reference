@@ -454,7 +454,6 @@ Used for storing text.
 		max_length?: Number,
 		min_length?: Number,
 		include_in_search?: Boolean,
-		strip_html?: Boolean
 	}
 	```
 	
@@ -462,8 +461,7 @@ Used for storing text.
 	
 	* `max_length`: **optional**. If specified, all text with char count higher than that will be rejected with an appropriate error message.
 	* `min_length`: **optional**. If specified, all text with char count lower than that will be rejected with an appropriate error message.
-	* `include_in_search`: **optional**. Defaults to `false`. If set to `true`, the datastore will be instructed to create a full-text index on contents of the field.
-	* `strip_html`: **optional**. Defaults to `false`. If set to `true`, all of the html tags contained in user input will be irreversibly removed.
+	* `full_text_search`: **optional**. Defaults to `false`. If set to `true`, the datastore will be instructed to create a full-text index on contents of the field.
 	
 * **sensitivity**
 
@@ -475,7 +473,10 @@ Used for storing text.
 	
 * **storage format**
 
-	The text will be stored as a string in the datastore. In certain cases the stored text might be modified before saving (e.G. when HTML sanitization is enabled)
+	The text will be stored as an object with two properties:
+	
+	* original: the original string, as input by the user;
+	* safe: a html-safe version of the user input;
 	
 #### username
 
