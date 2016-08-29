@@ -312,9 +312,14 @@ Stores a binary file.
 
 * **acceptable values**
   
-    This field accepts only objects that are an instance of `Sealious.File` as it's `value` parameter.
+    This field accepts: 
 	
-	Example: 
+	* objects that are an instance of `Sealious.File` and
+	* strings that are HTTP URLs to an accessible file
+	
+	as it's `value` parameter.
+	
+	Here's an example on how to create a Sealious.File instance:
 	
 	```javascript
 	var context = new Sealious.Context();
