@@ -507,6 +507,29 @@ Extends the [text](#text) field-type.
 
 	See: [text](#text) field type.
 	
+#### html
+
+Extends the [text](#text) field-type.
+
+* **acceptable values**
+
+	Accepts all text values that would be accepted by field-type-text with the same restrictions in params.
+	
+* **Sensitivity**
+
+	Things that can influence the behavior of fields of this type:
+	
+	* `value`
+	* `params`
+	
+* **params synopsis**
+
+	See params for the [text](#text) field type.
+	
+* **storage format**
+
+	Similar to [text](#text) field type, but the 'safe' value is additionally deprived of any xss code.
+	
 ### Resource Types
 
 #### User

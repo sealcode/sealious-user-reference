@@ -58,6 +58,7 @@ Table of Contents
         -   [single\_reference](#single_reference)
         -   [text](#text)
         -   [username](#username)
+        -   [html](#html)
     -   [Resource Types](#resource-types)
         -   [User](#user)
 
@@ -779,9 +780,14 @@ Stores a binary file.
 
 -   **acceptable values**
 
-    This field accepts only objects that are an instance of `Sealious.File` as it's `value` parameter.
+    This field accepts:
 
-    Example:
+    -   objects that are an instance of `Sealious.File` and
+    -   strings that are HTTP URLs to an accessible file
+
+    as it's `value` parameter.
+
+    Here's an example on how to create a Sealious.File instance:
 
     ``` javascript
     var context = new Sealious.Context();
@@ -960,6 +966,28 @@ Extends the [text](#text) field-type.
 -   **storage format**
 
     See: [text](#text) field type.
+
+#### html
+
+Extends the [text](#text) field-type.
+
+-   **acceptable values**
+
+    Accepts all text values that would be accepted by field-type-text with the same restrictions in params.
+
+-   **Sensitivity**
+
+    Things that can influence the behavior of fields of this type:
+
+    -   `value`
+    -   `params`
+-   **params synopsis**
+
+    See params for the [text](#text) field type.
+
+-   **storage format**
+
+    Similar to [text](#text) field type, but the 'safe' value is additionally deprived of any xss code.
 
 ### Resource Types
 
