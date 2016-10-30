@@ -1,7 +1,4 @@
-<!-- DON'T EDIT THIS FILE!! This is a file built from the source .md files (see Makefile). The build process will override changes made to this file. Edit other .md files instead. -->
-
-
-
+<!-- DON'T EDIT THIS FILE!! This is a file built from the source .md files (see Makefile). The build process will override changes made to this file. Edit other .md files instead. -->\n\n\n
 
 
 
@@ -61,6 +58,8 @@ Table of Contents
         -   [html](#html)
     -   [Resource Types](#resource-types)
         -   [User](#user)
+    -   [Misc](#misc)
+        -   [Range](#range)
 
 <h2 id="content-anchor">&nbsp;</h2>
 
@@ -885,6 +884,13 @@ Accepts only integer numbers (positive or negative).
 
     The values are stored verbatim as Numbers in the datastore.
 
+-   **filter format**
+
+    <pre>
+    int_filter: Number | <a href="#range">Range</a>;
+    </pre>
+
+
 #### single\_reference
 
 Can reference any other resource.
@@ -1001,3 +1007,23 @@ The default field in the User resource type are:
 -   last\_login\_context (type: [context](#context))
 
 By default, anyone can register (create a user), but only the user itself can edit or delete the account.
+
+### Misc
+
+#### Range
+
+Ranges are used to specify a range of numbers. Synnopsis:
+
+``` javascript
+type Range{
+    '<' | 'lt'?: Number,
+    '>' | 'gt'?: Number,
+    '<=' | '=<' | 'lte'?: Number,
+    '>=' | '=>' | 'gte'?: Number,
+}
+```
+
+Examples:
+
+-   `{'>': 100}` - a number greater than 100
+-   `{'>': 100, '<=': 200}` - a number greater than 100, but smaller than or equal to 200

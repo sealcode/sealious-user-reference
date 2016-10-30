@@ -419,7 +419,13 @@ Accepts only integer numbers (positive or negative).
 * **storage format**
 
 	The values are stored verbatim as Numbers in the datastore.
-	
+
+* **filter format**
+
+    <pre>
+	int_filter: Number | <a href="#range">Range</a>;
+	</pre>
+
 #### single_reference
 
 Can reference any other resource.
@@ -544,3 +550,22 @@ The default field in the User resource type are:
 By default, anyone can register (create a user), but only the user itself can edit or delete the account. 
 
 
+### Misc
+
+#### Range
+
+Ranges are used to specify a range of numbers. Synnopsis:
+
+```javascript
+type Range{
+	'<' | 'lt'?: Number,
+	'>' | 'gt'?: Number,
+	'<=' | '=<' | 'lte'?: Number,
+	'>=' | '=>' | 'gte'?: Number,
+}
+```
+
+Examples:
+
+* `{'>': 100}` - a number greater than 100
+* `{'>': 100, '<=': 200}` - a number greater than 100, but smaller than or equal to 200
