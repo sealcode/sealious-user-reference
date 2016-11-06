@@ -7,7 +7,7 @@ Sealious is a declarative, resource-oriented framework for creating application 
 When creating a Sealious application, the developer has to focus on the "what" of the application, not the "how". Consider the following Sealious resource-type declaration:
 
 ```javascript
-var Person = new Sealious.Collection({
+var Person = SealiousApp.createCollection({
 	name: "people",
 	fields: [
 		{name: "full-name", type: "text", required: true},
@@ -34,7 +34,7 @@ digraph SubjectGraph {
 	node [fontname = "Neris"];
 	edge [fontname = "Neris"];
 	rank=same;
-	Root -> Resources [label=resources];
+	Root -> Collections [label=resources];
 	Root -> Sessions [label=sessions];
 	Root -> Users [label=users];
 	Root -> UploadedFiles [label="uploaded-files"];
@@ -44,8 +44,8 @@ digraph SubjectGraph {
 	current_session [label="{Current session | { delete() }}" shape="record"];
 	Sessions -> current_session [label="current"];
 	
-	RT1 [label="{Resource Type Collection | {show() | create()  }}" shape="record"];
-	Resources -> RT1 [label=":resource-type-name"];
+	RT1 [label="{Collection | {show() | create()  }}" shape="record"];
+	Resources -> RT1 [label=":collection-name"];
 	
 	me [label="{the authorized User | show() }" shape="record"];
 	Users -> me [label="me"];
@@ -68,7 +68,7 @@ Note that it does look like a tree in the above example, but certain custom Subj
 
 Sealious's structure is highly modular. In fact, one cannot create a functional Sealious application without using at least one module! (Fortunately, Sealious comes with sane default modules to ease development). 
 
-Sealious uses `npm` as a way to distribute it's modules. To distinguish them from regular node modules, Sealious modules from `npm` are called "plugins".
+Sealious uses `npm` as a way to distribute its modules. To distinguish them from regular node modules, Sealious modules from `npm` are called "plugins".
 
 Sealious plugins contain one or more "chips". Chips are small entities that contain a singular purpose. Every chip is one of these types:
 
@@ -88,9 +88,9 @@ Examples:
 * REST, 
 * WebSocket.
 
-#### Resource Type
+#### Collection
 
-Describes the template for all elements in a Resource Type Collection. Contains *Fields* - each with a *FieldType* assigned.
+Describes the template for all elements in a Collection. Contains *Fields* - each with a *FieldType* assigned.
 
 Examples: 
 
@@ -101,7 +101,7 @@ Examples:
 
 #### Field Type
 
-Describes behavior for a type of a field in a Resource Type: what are the correct values handled by this field? Can be parametrized and inherit from other field types.
+Describes behavior for a type of a field in a Collection: what are the correct values handled by this field? Can be parametrized and inherit from other field types.
 
 Examples:
 
@@ -151,7 +151,7 @@ Assume the following client input:
 
 ```json
 {
-	"path": "/resources/person",
+	"path": "/api/v1/collections/people",
 	"method": "create",
 	"arguments": {
 		"name": "Alice",
