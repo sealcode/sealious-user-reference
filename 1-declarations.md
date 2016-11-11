@@ -43,6 +43,7 @@ type Params: Object<String, Any>;
 		has_index?: (params: Any) =&gt; false | index_type: String | Promise&lt;false | index_type: String&gt;
 		format?: (
 			context: Context,
+			params: Any,
 			decoded_value: Any,
 			format: String
 		) =&gt; formatted_value: Any | Promise&lt;formatted_value: Any&gt;
